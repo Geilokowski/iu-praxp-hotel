@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(Roboto-Regular.ttf);
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+}
+
+.action-button-wrapper {
+    padding: 3px 4px;
+}
+
+.table-action-button-list-wrapper {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-message {
+    color: #4BB543;
+    text-align: center;
+}
+
+.error-message {
+    color: #d74338;
+    text-align: center;
+}
+
+.button {
+    border-radius: 3px;
+    padding: 4px 7px;
+    border: 2px #808080;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.delete-button {
+    color: white;
+    background-color: #d74338;
+}
+
+.delete-button:hover {
+    background-color: #c91d12;
+}
+
+.view-customer-orders-button {
+    background-color: #D3D3D3;
+}
+
+.view-customer-orders-button:hover {
+    background-color: #C0C0C0;
+}
+
+.customer-id-column {
+    width: 20%
+}
+
+h2 {
+    text-align: center;
+    width: 100%;
+}
+
+.customer-table {
+    width: 85%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.customer-table th {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.customer-table td {
+    padding: 10px 0;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.customer-table th {
+    border-bottom: 1px solid #696969;
+}

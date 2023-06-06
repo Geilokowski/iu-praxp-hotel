@@ -1,0 +1,13 @@
+services:
+  praxp-hotel-db:
+    container_name: praxp-hotel-db
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+        - postgres:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+volumes:
+  postgres:

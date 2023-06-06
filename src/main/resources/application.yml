@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+  application:
+    name: hotel-service-management
+  liquibase:
+    change-log: liquibase.xml
+  jpa:
+    hibernate:
+      ddl-auto: update

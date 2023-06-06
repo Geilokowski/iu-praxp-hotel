@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--/*@thymesVar id="bookings" type="java.util.List<org.iu.study.hotel.dtos.BookingDTO>"*/-->
+<!--/*@thymesVar id="customer" type="org.iu.study.hotel.dtos.CustomerDTO"*/-->
+<!--/*@thymesVar id="editedBooking" type="org.iu.study.hotel.dtos.BookingDTO"*/-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel | Buchungsverwaltung</title>
+    <link rel="stylesheet" href="/table-style.css"/>
+</head>
+<body>
+<h2>Buchungsverwaltung</h2>
+
+<p th:if="${isError}" th:text="${errorMessage}" class="error-message">
+    Dieser Link ist leider nicht gültig, bitte wählen Sie eine Buchung aus der Liste aus.
+</p>
+
+<p th:if="${isSuccess}" th:text="${successMessage}" class="success-message">
+    Die Aktion wurde ausgefÜhrt.
+</p>
+
+<form id="editForm" method="post"
+      th:action="@{|/bookings/${editedBooking.getId()}/edit|}"
+      th:object="${editedBooking}">
+</form>
+
+<table class="customer-table">
+    <thead>
+    <tr>
+        <th style="width: 20%">Buchungsnummer</th>
+        <th style="width: 23%"><label for="personCount">Anzahl Personen</label></th>
+        <th style="width: 23%"><label for="startDate">Start</label></th>
+        <th style="width: 23%"><label for="endDate">Ende</label></th>
+        <th style="width: 34%">Aktionen</th>
+    </tr>
+    </thead>
+
+    <tbody>
+
+    <tr style="background-color: #A8A8A8">
+        <td th:text="${editedBooking.getId()}"></td>
+        <td>
+            <input form="editForm" id="personCount" type="number"
+                   th:field="*{editedBooking.personCount}">
+        </td>
+        <td>
+            <input form="editForm" id="startDate" type="date"
+                   th:field="*{editedBooking.startDate}">
+        </td>
+        <td>
+            <input form="editForm" id="endDate" type="date"
+                   th:field="*{editedBooking.endDate}">
+        </td>
+        <td>
+            <div class="table-action-button-list-wrapper">
+                <div class="action-button-wrapper">
+                    <button form="editForm"
+                            type="submit"
+                            class="button view-customer-orders-button"
+                            value="view-bookings"
+                            style="color: white; background-color: dodgerblue">
+                        Speichern
+                    </button>
+                </div>
+
+                <div class="action-button-wrapper">
+                    <a th:href="@{|/customers/${customer.getId()}/bookings|}">
+                        <button class="button view-customer-orders-button" value="edit">
+                            Abbrechen
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </td>
+    </tr>
+
+    <tr th:each="booking : ${bookings}">
+        <td th:text="${booking.getId()}"></td>
+        <td th:text="${booking.getPersonCount()}"></td>
+        <td th:text="${booking.getFormattedStartDate()}"></td>
+        <td th:text="${booking.getFormattedEndDate()}"></td>
+        <td>
+            <div class="table-action-button-list-wrapper">
+                <div class="action-button-wrapper">
+                    <a th:href="@{|/bookings/${booking.getId()}/edit|}">
+                        <button class="button view-customer-orders-button">
+                            Bearbeiten
+                        </button>
+                    </a>
+                </div>
+
+                <div class="action-button-wrapper">
+                    <a th:href="@{|/bookings/${booking.getId()}/delete|}">
+                        <button class="button delete-button" value="delete">
+                            Löschen
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel | Kundenverwaltung</title>
+    <link rel="stylesheet" href="/table-style.css"/>
+</head>
+<body>
+    <h2>Kundenverwaltung</h2>
+
+    <p th:if="${isError}" th:text="${errorMessage}" class="error-message">
+        Dieser Link ist leider nicht gültig, bitte wählen Sie einen Kunden aus der Liste aus.
+    </p>
+
+    <p th:if="${isSuccess}" th:text="${successMessage}" class="success-message">
+        Die Aktion wurde ausgefÜhrt.
+    </p>
+
+    <form id="createForm"
+          method="post"
+          th:action="@{/customers}"
+          th:object="${newCustomer}">
+    </form>
+
+    <table class="customer-table">
+        <thead>
+            <tr>
+                <th style="width: 20%">Kundennummer</th>
+                <th style="width: 23%"><label for="firstName">Vorname</label></th>
+                <th style="width: 23%"><label for="lastName">Nachname</label></th>
+                <th style="width: 34%">Aktionen</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        <tr>
+            <td>Wird automatisch erstellt</td>
+            <td>
+                <input type="text" form="createForm" placeholder="Vorname" name="firstName" id="firstName">
+            </td>
+            <td>
+                <input type="text" form="createForm" placeholder="Nachname" name="lastName" id="lastName">
+            </td>
+            <td>
+                <div class="table-action-button-list-wrapper">
+                    <div class="action-button-wrapper">
+                        <button class="button view-customer-orders-button" form="createForm" type="submit">
+                            Kunde anlegen
+                        </button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+
+        <tr th:each="customer : ${customers}">
+            <td th:text="${customer.getId()}"></td>
+            <td th:text="${customer.getFirstName()}"></td>
+            <td th:text="${customer.getLastName()}"></td>
+            <td>
+                <div class="table-action-button-list-wrapper">
+                    <div class="action-button-wrapper">
+                        <a th:href="@{|/customers/${customer.getId()}/bookings|}">
+                            <button class="button view-customer-orders-button" value="view-bookings">
+                                Buchungen ansehen
+                            </button>
+                        </a>
+                    </div>
+
+                    <div class="action-button-wrapper">
+                        <a th:href="@{|/customers/${customer.getId()}/edit|}">
+                            <button class="button view-customer-orders-button">
+                                Bearbeiten
+                            </button>
+                        </a>
+                    </div>
+
+                    <div class="action-button-wrapper">
+                        <a th:href="@{|/customers/${customer.getId()}/delete|}">
+                            <button class="button delete-button" value="delete">
+                                Löschen
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</body>
+</html>
